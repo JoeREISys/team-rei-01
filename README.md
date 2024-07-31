@@ -1,47 +1,84 @@
-# Federal AI Hackathon
+# Project Title
 
-This repository serves as a template for your team to create your own repository that you can use to submit your hackathon solution. You are not required to use this repository or GitHub to submit your solution, but you are required to submit all of your materials to us.
+Transforming EIA with Knowledge Graphs and NLP  
+## Project Overview
 
-## How to use this repository as a template
+This project involves scraping EIA to gather all HTML files, PDFs, and other publicly available data. Once the data is collected, it undergoes extensive processing to extract valuable information.
 
-### Creating a repository
+### Table of Contents
 
-To use this repository, use the "Use this template" button to create a new repository ([see instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)).
+- [Data Collection and Processing](#data-collection-and-processing)
+- [Knowledge Graph Creation](#knowledge-graph-creation)
+- [RDF Store Population](#rdf-store-population)
+- [Querying and Response Generation](#querying-and-response-generation)
+- [Summary](#summary)
 
-When creating a new repository, keep in mind:
+## Data Collection and Processing
 
-* Your repository name must include your team name and your two-digit team ID (example: `my-awesome-team-99`)
-* You must create your team's repository under your own GitHub account or GitHub organization
-* Your repository must be set to public
-* Your repository must allow forking (this is the default when creating a new repository)
-* Your repository must not be deleted until instructed otherwise by hackathon staff
+### Web Scraping
+The website is thoroughly scraped to retrieve all HTML files, PDFs, and other relevant documents.
 
-### Submitting your repository
+### Data Processing
+The collected data is processed to extract useful information. This involves:
+- **HTML Parsing**: Unnecessary HTML tags are removed, and table tags are converted into natural language text using advanced language models such as ChatGPT.
+- **Text Cleaning**: The text is cleaned by removing stop words, trimming extra lines, and eliminating non-ASCII characters.
 
-After you create you repository from this template, submit your repository's URL to the hackathon staff on Slack. Please submit the full URL, such as [https://github.com/octocat/Spoon-Knife](https://github.com/octocat/Spoon-Knife). We will then fork your repository and keep our fork updated.
+## Knowledge Graph Creation
 
-### Using the repository
+Each webpage undergoes the above processing steps to distill useful information. This information is then converted into a knowledge graph by leveraging a language model and predefined ontologies. The language model categorizes the extracted text into a structured knowledge graph format, which is subsequently converted into Turtle files.
 
-* The `slides` directory is for your team's final presentations. Please ensure your slides are in this directory at the time of judging.
-* You may place any and all files you wish to submit in this repository, using any project structure.
-* Please consider keeping this README file, but delete all of this template text and customize it with helpful information about your solution. There is no specific format you should follow, but you can refer to the example sections below for some ideas.
+## RDF Store Population
 
-## Introduction
+The generated Turtle files are sent to an endpoint that ingests them and populates an RDF store. This RDF store comprises various entities and their relationships, adhering to the triple statements format.
 
-In this section, you can briefly introduce the solution. Overall, what does it do? What problem does it solve?
+## Querying and Response Generation
 
-## Features
+When a user submits a query in natural language:
+1. **Query Conversion**: The natural language query is converted into a SPARQL query using ChatGPT, based on the predefined ontologies.
+2. **Data Retrieval**: The SPARQL query is executed against the RDF database to retrieve the relevant data.
+3. **Response Generation**: The retrieved data is transformed into natural language text, making it understandable for users. This transformation is performed by ChatGPT.
 
-In this section, you can describe the features your solution has.
+## Summary
 
-## Installation
+This project streamlines the process of converting web data into a structured knowledge graph and provides an efficient way to query this data using natural language. It leverages cutting-edge language models to ensure the extracted and queried information is accurate and easily comprehensible.
 
-In this section, you can describe how to get started with your solution. This could include configuring the environment and your solution, installing prerequisites, etc.
+## Getting Started
 
-## Usage
+### Dependencies
 
-In this section, you can describe how to use the solution.
+* Python
+* SparQL
+* fitz  # PyMuPDF
+* BeautifulSoup
+* requests
+* chardet
+* re
+* spacy
+* knowledge_graph_maker
+* os
+* lambda labs
+* 
+### Installing
 
-## Examples
+* pip install them
+* Any modifications needed to be made to files/folders
 
-In this section, you can provide practical examples of how one would use the solution.
+
+### Resources
+
+* https://platform.openai.com/docs/guides/text-generation
+* https://towardsdatascience.com/text-to-knowledge-graph-made-easy-with-graph-maker-f3f890c0dbe8
+* https://towardsdatascience.com/how-to-convert-any-text-into-a-graph-of-concepts-110844f22a1a
+* NoIp
+* Lambda CLoud
+* AWS EC2
+
+
+### URLs:
+
+* https://ec2-34-222-196-161.us-west-2.compute.amazonaws.com:9999/blazegraph/
+* https://eiagovkb.hopto.org/retrieve
+
+
+
+
